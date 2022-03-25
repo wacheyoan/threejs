@@ -1,20 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-</head>
-<body>
-    <div class="tenor-gif-embed" data-postid="23414661" data-share-method="host" data-aspect-ratio="1.11111" data-width="50%"><a href="https://tenor.com/view/i-was-acting-gif-23414661">I Was Acting GIF</a>from <a href="https://tenor.com/search/i+was+acting-gifs">I Was Acting GIFs</a></div> 
-    <script type="text/javascript" async src="https://tenor.com/embed.js"></script>
-    <button id="button">Click me</button>
+  </head>
+  <body>
+    <div
+      class="tenor-gif-embed"
+      data-postid="23414661"
+      data-share-method="host"
+      data-aspect-ratio="1.11111"
+      data-width="50%"
+    >
+      <a href="https://tenor.com/view/i-was-acting-gif-23414661"
+        >I Was Acting GIF</a
+      >from
+      <a href="https://tenor.com/search/i+was+acting-gifs">I Was Acting GIFs</a>
+    </div>
+    <script
+      type="text/javascript"
+      async
+      src="https://tenor.com/embed.js"
+    ></script>
+    <canvas id="canvas" width="600px" height="600px"></canvas>
     <script>
-        let button = document.getElementById('button');
-        button.addEventListener('click',function(e){
-            console.log(e);
-        })
+      const c = document.getElementById("canvas");
+      const ctx = c.getContext("2d");
+
+      let x = 10;
+      let y = 50;
+      let dx = 1;
+      let dy = 1;
+
+      function f() {
+        ctx.clearRect(0, 0, c.width, c.height);
+        ctx.beginPath();
+        ctx.lineWidth = "2";
+        ctx.strokeStyle = "red";
+        ctx.rect(x, y, 10, 10);
+        ctx.stroke();
+
+        if (x + dx <= 0 || x + dx + 10 > c.width) {
+          dx = -dx;
+        }
+        if (y + dy <= 0 || y + dy + 10 > c.height) {
+          dy = -dy;
+        }
+
+        x += dx;
+        y += dy;
+
+        setTimeout(f, 0);
+      }
+      f();
     </script>
-</body>
+  </body>
 </html>
