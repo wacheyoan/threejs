@@ -59,6 +59,5 @@ export class App {
         this._camera.aspect = ratio;
         this._camera.updateProjectionMatrix();        
         this._renderer.setSize(w,h);
-        this._render();
     }
 }
