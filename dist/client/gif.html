@@ -28,33 +28,41 @@
     <script>
       const c = document.getElementById("canvas");
       const ctx = c.getContext("2d");
+      const rectangles = [
+          {x:0,y:0,dx:1,dy:1,color:"red"},
+          {x:10,y:30,dx:1,dy:1,color:"green"}
+      ]
 
-      let x = 10;
-      let y = 50;
-      let dx = 1;
-      let dy = 1;
 
-      function f() {
-        ctx.clearRect(0, 0, c.width, c.height);
+      function animeRectangle(key)
+      {
         ctx.beginPath();
         ctx.lineWidth = "2";
-        ctx.strokeStyle = "red";
-        ctx.rect(x, y, 10, 10);
+        ctx.strokeStyle = rectangles[key].color;
+        ctx.rect(rectangles[key].x, rectangles[key].y, 10, 10);
         ctx.stroke();
 
-        if (x + dx <= 0 || x + dx + 10 > c.width) {
-          dx = -dx;
+        if (rectangles[key].x + rectangles[key].dx <= 0 || rectangles[key].x + rectangles[key].dx + 10 > c.width) {
+            rectangles[key].dx = -rectangles[key].dx;
         }
-        if (y + dy <= 0 || y + dy + 10 > c.height) {
-          dy = -dy;
+        if (rectangles[key].y + rectangles[key].dy <= 0 || rectangles[key].y + rectangles[key].dy + 10 > c.height) {
+            rectangles[key].dy = -rectangles[key].dy;
         }
 
-        x += dx;
-        y += dy;
+        rectangles[key].x += rectangles[key].dx;
+        rectangles[key].y += rectangles[key].dy;
+      }
 
+      function f() {
+        animeRectangle(0);
         setTimeout(f, 0);
       }
+      function f2() {
+        animeRectangle(1);
+        requestAnimationFrame(f2,0)
+      }
       f();
+      f2();
     </script>
   </body>
 </html>
